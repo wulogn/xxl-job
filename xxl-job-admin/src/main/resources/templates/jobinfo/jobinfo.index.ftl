@@ -206,6 +206,14 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="lastname" class="col-sm-2 control-label">${I18n.jobinfo_field_shardTotal_placeholder}<font color="black">*</font></label>
+                        <div class="col-sm-4"><input type="text" class="form-control" name="shardTotal" placeholder="${I18n.jobinfo_field_shardTotal_placeholder}" maxlength="100" ></div>
+
+                        <label for="lastname" class="col-sm-2 control-label">${I18n.jobinfo_field_shardStep_placeholder}<font color="black">*</font></label>
+                        <div class="col-sm-4"><input type="text" class="form-control" name="shardStep" placeholder="${I18n.jobinfo_field_shardStep_placeholder}" maxlength="100" ></div>
+                    </div>
+
+                    <div class="form-group">
                         <label for="firstname" class="col-sm-2 control-label">${I18n.misfire_strategy}<font color="black">*</font></label>
                         <div class="col-sm-4">
                             <select class="form-control" name="misfireStrategy" >
@@ -448,6 +456,14 @@ exit 0
 
                         <label for="lastname" class="col-sm-2 control-label">${I18n.jobinfo_field_childJobId}<font color="black">*</font></label>
                         <div class="col-sm-4"><input type="text" class="form-control" name="childJobId" placeholder="${I18n.jobinfo_field_childJobId_placeholder}" maxlength="100" ></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lastname" class="col-sm-2 control-label">${I18n.jobinfo_field_shardTotal_placeholder}<font color="black">*</font></label>
+                        <div class="col-sm-4"><input type="text" class="form-control" name="shardTotal" placeholder="${I18n.jobinfo_field_shardTotal_placeholder}" maxlength="100" ></div>
+
+                        <label for="lastname" class="col-sm-2 control-label">${I18n.jobinfo_field_shardStep_placeholder}<font color="black">*</font></label>
+                        <div class="col-sm-4"><input type="text" class="form-control" name="shardStep" placeholder="${I18n.jobinfo_field_shardStep_placeholder}" maxlength="100" ></div>
                     </div>
 
                     <div class="form-group">

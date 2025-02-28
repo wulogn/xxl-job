@@ -124,6 +124,7 @@ public class JobThread extends Thread{
 							triggerParam.getExecutorParams(),
 							logFileName,
 							triggerParam.getBroadcastIndex(),
+							triggerParam.getBroadcastStep(),
 							triggerParam.getBroadcastTotal());
 
 					// init job context

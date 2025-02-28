@@ -24,6 +24,10 @@ public class XxlJobInfo {
 	private String scheduleConf;			// 调度配置，值含义取决于调度类型
 	private String misfireStrategy;			// 调度过期策略
 
+	private Integer shardTotal;             // 分片总数
+	private Integer shardIndex;             // 当前分片序号
+	private Integer shardStep;              // 分片步长
+
 	private String executorRouteStrategy;	// 执行器路由策略
 	private String executorHandler;		    // 执行器，任务Handler名称
 	private String executorParam;		    // 执行器，任务参数
@@ -169,6 +173,30 @@ public class XxlJobInfo {
 
 	public void setExecutorFailRetryCount(int executorFailRetryCount) {
 		this.executorFailRetryCount = executorFailRetryCount;
+	}
+
+	public Integer getShardTotal() {
+		return shardTotal;
+	}
+
+	public void setShardTotal(Integer shardTotal) {
+		this.shardTotal = shardTotal;
+	}
+
+	public Integer getShardIndex() {
+		return shardIndex;
+	}
+
+	public void setShardIndex(Integer shardIndex) {
+		this.shardIndex = shardIndex;
+	}
+
+	public Integer getShardStep() {
+		return shardStep;
+	}
+
+	public void setShardStep(Integer shardStep) {
+		this.shardStep = shardStep;
 	}
 
 	public String getGlueType() {

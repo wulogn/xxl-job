@@ -43,6 +43,11 @@ public class XxlJobContext {
      */
     private final int shardTotal;
 
+    /**
+     * shard step
+     */
+    private final int shardStep;
+
     // ---------------------- for handle ----------------------
 
     /**
@@ -62,12 +67,16 @@ public class XxlJobContext {
 
 
     public XxlJobContext(long jobId, String jobParam, String jobLogFileName, int shardIndex, int shardTotal) {
+        this(jobId, jobParam, jobLogFileName, shardIndex, -1, shardTotal);
+    }
+
+    public XxlJobContext(long jobId, String jobParam, String jobLogFileName, int shardIndex, int shardStep, int shardTotal) {
         this.jobId = jobId;
         this.jobParam = jobParam;
         this.jobLogFileName = jobLogFileName;
         this.shardIndex = shardIndex;
         this.shardTotal = shardTotal;
-
+        this.shardStep = shardStep;
         this.handleCode = HANDLE_CODE_SUCCESS;  // default success
     }
 
@@ -89,6 +98,10 @@ public class XxlJobContext {
 
     public int getShardTotal() {
         return shardTotal;
+    }
+
+    public int getShardStep() {
+        return shardStep;
     }
 
     public void setHandleCode(int handleCode) {

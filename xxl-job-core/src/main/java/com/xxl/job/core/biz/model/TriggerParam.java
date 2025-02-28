@@ -23,6 +23,7 @@ public class TriggerParam implements Serializable{
     private long glueUpdatetime;
 
     private int broadcastIndex;
+    private int broadcastStep;
     private int broadcastTotal;
 
 
@@ -116,6 +117,14 @@ public class TriggerParam implements Serializable{
 
     public int getBroadcastTotal() {
         return broadcastTotal;
+    }
+
+    public int getBroadcastStep() {
+        return broadcastStep;
+    }
+
+    public void setBroadcastStep(int broadcastStep) {
+        this.broadcastStep = broadcastStep;
     }
 
     public void setBroadcastTotal(int broadcastTotal) {

@@ -2,8 +2,8 @@
 # XXL-JOB
 # Copyright (c) 2015-present, xuxueli.
 
-CREATE database if NOT EXISTS `xxl_job` default character set utf8mb4 collate utf8mb4_unicode_ci;
-use `xxl_job`;
+CREATE database if NOT EXISTS `wjj_xxl_job` default character set utf8mb4 collate utf8mb4_unicode_ci;
+use `wjj_xxl_job`;
 
 SET NAMES utf8mb4;
 
@@ -36,6 +36,10 @@ CREATE TABLE `xxl_job_info`
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4;
+
+ALTER TABLE wjj_xxl_job.xxl_job_info ADD shard_total int(11) NULL COMMENT '步进分片总数';
+ALTER TABLE wjj_xxl_job.xxl_job_info ADD shard_index int(11) NULL COMMENT '步进分片当前索引';
+ALTER TABLE wjj_xxl_job.xxl_job_info ADD shard_step int(11) NULL COMMENT '步进大小';
 
 CREATE TABLE `xxl_job_log`
 (

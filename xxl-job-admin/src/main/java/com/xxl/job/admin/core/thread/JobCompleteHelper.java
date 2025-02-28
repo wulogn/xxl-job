@@ -2,7 +2,10 @@ package com.xxl.job.admin.core.thread;
 
 import com.xxl.job.admin.core.complete.XxlJobCompleter;
 import com.xxl.job.admin.core.conf.XxlJobAdminConfig;
+import com.xxl.job.admin.core.model.XxlJobInfo;
 import com.xxl.job.admin.core.model.XxlJobLog;
+import com.xxl.job.admin.core.route.ExecutorRouteStrategyEnum;
+import com.xxl.job.admin.core.trigger.TriggerTypeEnum;
 import com.xxl.job.admin.core.util.I18nUtil;
 import com.xxl.job.core.biz.model.HandleCallbackParam;
 import com.xxl.job.core.biz.model.ReturnT;
@@ -175,6 +178,12 @@ public class JobCompleteHelper {
 		log.setHandleCode(handleCallbackParam.getHandleCode());
 		log.setHandleMsg(handleMsg.toString());
 		XxlJobCompleter.updateHandleInfoAndFinish(log);
+
+		// 步进分片，callback触发下一次步进任务
+		XxlJobInfo jobInfo = XxlJobAdminConfig.getAdminConfig().getXxlJobInfoDao().loadById(log.getJobId());
+		if (ExecutorRouteStrategyEnum.STEP_SHARDING==ExecutorRouteStrategyEnum.match(jobInfo.getExecutorRouteStrategy(), null)) {
+			JobTriggerPoolHelper.trigger(jobInfo.getId(), TriggerTypeEnum.API, -1, log.getExecutorShardingParam(), log.getExecutorParam(), log.getExecutorAddress());
+		}
 
 		return ReturnT.SUCCESS;
 	}

@@ -20,6 +20,9 @@
 		<result column="misfire_strategy" property="misfireStrategy" />
 
 		<result column="executor_route_strategy" property="executorRouteStrategy" />
+		<result column="shard_total" property="shardTotal" />
+		<result column="shard_index" property="shardIndex" />
+		<result column="shard_step" property="shardStep" />
 		<result column="executor_handler" property="executorHandler" />
 	    <result column="executor_param" property="executorParam" />
 		<result column="executor_block_strategy" property="executorBlockStrategy" />
@@ -50,6 +53,9 @@
 		t.schedule_conf,
 		t.misfire_strategy,
 		t.executor_route_strategy,
+		t.shard_total,
+		t.shard_index,
+		t.shard_step,
 		t.executor_handler,
 		t.executor_param,
 		t.executor_block_strategy,
@@ -123,6 +129,9 @@
 			schedule_conf,
 			misfire_strategy,
             executor_route_strategy,
+			shard_total,
+			shard_index,
+			shard_step,
 			executor_handler,
 			executor_param,
 			executor_block_strategy,
@@ -147,6 +156,9 @@
 			#{scheduleConf},
 			#{misfireStrategy},
 			#{executorRouteStrategy},
+			#{shardTotal},
+			#{shardIndex},
+			#{shardStep},
 			#{executorHandler},
 			#{executorParam},
 			#{executorBlockStrategy},
@@ -185,6 +197,9 @@
 			schedule_conf = #{scheduleConf},
 			misfire_strategy = #{misfireStrategy},
 			executor_route_strategy = #{executorRouteStrategy},
+			shard_total = #{shardTotal},
+			shard_index = #{shardIndex},
+			shard_step = #{shardStep},
 			executor_handler = #{executorHandler},
 			executor_param = #{executorParam},
 			executor_block_strategy = #{executorBlockStrategy},

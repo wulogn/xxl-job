@@ -6,6 +6,7 @@ import com.xxl.job.admin.core.model.XxlJobInfo;
 import com.xxl.job.admin.core.model.XxlJobLog;
 import com.xxl.job.admin.core.route.ExecutorRouteStrategyEnum;
 import com.xxl.job.admin.core.scheduler.XxlJobScheduler;
+import com.xxl.job.admin.core.thread.JobRegistryHelper;
 import com.xxl.job.admin.core.util.I18nUtil;
 import com.xxl.job.core.biz.ExecutorBiz;
 import com.xxl.job.core.biz.model.ReturnT;
@@ -82,6 +83,19 @@ public class XxlJobTrigger {
             for (int i = 0; i < group.getRegistryList().size(); i++) {
                 processTrigger(group, jobInfo, finalFailRetryCount, triggerType, i, group.getRegistryList().size());
             }
+        } if (ExecutorRouteStrategyEnum.STEP_SHARDING==ExecutorRouteStrategyEnum.match(jobInfo.getExecutorRouteStrategy(), null)
+                && group.getRegistryList()!=null && !group.getRegistryList().isEmpty()) {
+            // 步进分片：对每个在线执行器启动一次，后续通过callback机制进行下次步进调用
+            for (int i = 0; i < group.getRegistryList().size(); i++) {
+                if (jobInfo.getShardIndex() == null) {
+                    jobInfo.setShardIndex(0);
+                }
+                if (jobInfo.getShardIndex() < jobInfo.getShardTotal()) {
+                    processTrigger(group, jobInfo, finalFailRetryCount, triggerType, jobInfo.getShardIndex(), jobInfo.getShardTotal());
+                    jobInfo.setShardIndex(jobInfo.getShardIndex() + jobInfo.getShardStep());
+                }
+            }
+            XxlJobAdminConfig.getAdminConfig().getXxlJobInfoDao().update(jobInfo);
         } else {
             if (shardingParam == null) {
                 shardingParam = new int[]{0, 1};
@@ -136,6 +150,7 @@ public class XxlJobTrigger {
         triggerParam.setGlueSource(jobInfo.getGlueSource());
         triggerParam.setGlueUpdatetime(jobInfo.getGlueUpdatetime().getTime());
         triggerParam.setBroadcastIndex(index);
+        triggerParam.setBroadcastStep(jobInfo.getShardStep());
         triggerParam.setBroadcastTotal(total);
 
         // 3、init address

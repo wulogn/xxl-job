@@ -94,6 +94,15 @@ public class XxlJobHelper {
         return xxlJobContext.getShardTotal();
     }
 
+    public static int getShardStep() {
+        XxlJobContext xxlJobContext = XxlJobContext.getXxlJobContext();
+        if (xxlJobContext == null) {
+            return -1;
+        }
+
+        return xxlJobContext.getShardStep();
+    }
+
     // ---------------------- tool for log ----------------------
 
     private static Logger logger = LoggerFactory.getLogger("xxl-job logger");
