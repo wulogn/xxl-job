@@ -2,8 +2,8 @@
 # XXL-JOB
 # Copyright (c) 2015-present, xuxueli.
 
-CREATE database if NOT EXISTS `wjj_xxl_job` default character set utf8mb4 collate utf8mb4_unicode_ci;
-use `wjj_xxl_job`;
+CREATE database if NOT EXISTS `xxl_job` default character set utf8mb4 collate utf8mb4_unicode_ci;
+use `xxl_job`;
 
 SET NAMES utf8mb4;
 
@@ -20,6 +20,9 @@ CREATE TABLE `xxl_job_info`
     `schedule_conf`             varchar(128)          DEFAULT NULL COMMENT '调度配置，值含义取决于调度类型',
     `misfire_strategy`          varchar(50)  NOT NULL DEFAULT 'DO_NOTHING' COMMENT '调度过期策略',
     `executor_route_strategy`   varchar(50)           DEFAULT NULL COMMENT '执行器路由策略',
+    `shard_total`               int(11)               DEFAULT NULL COMMENT '步进分片总数',
+    `shard_index`               int(11)               DEFAULT NULL COMMENT '步进分片当前索引',
+    `shard_step`                int(11)               DEFAULT NULL COMMENT '步进大小',
     `executor_handler`          varchar(255)          DEFAULT NULL COMMENT '执行器任务handler',
     `executor_param`            varchar(512)          DEFAULT NULL COMMENT '执行器任务参数',
     `executor_block_strategy`   varchar(50)           DEFAULT NULL COMMENT '阻塞处理策略',
@@ -36,10 +39,6 @@ CREATE TABLE `xxl_job_info`
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4;
-
-ALTER TABLE wjj_xxl_job.xxl_job_info ADD shard_total int(11) NULL COMMENT '步进分片总数';
-ALTER TABLE wjj_xxl_job.xxl_job_info ADD shard_index int(11) NULL COMMENT '步进分片当前索引';
-ALTER TABLE wjj_xxl_job.xxl_job_info ADD shard_step int(11) NULL COMMENT '步进大小';
 
 CREATE TABLE `xxl_job_log`
 (
